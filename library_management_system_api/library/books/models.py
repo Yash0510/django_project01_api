@@ -27,3 +27,17 @@ class Book(models.Model):
     def __str__(self):
         return f'{self.title}'
 
+class BookCatalogue(models.Model):
+    book_id= models.ForeignKey(Book, on_delete= models.CASCADE)
+    no_of_books= models.IntegerField(max_length= 1000)
+
+class User(models.Model):
+    name= models.CharField(max_length= 50)
+    email= models.EmailField()
+    book_id= models.ForeignKey(Book, on_delete= models.CASCADE)
+
+class Librarian(models.Model):
+    book_catalogue= models.ForeignKey(BookCatalogue, on_delete= models.CASCADE)
+    user= models.ForeignKey(User, on_delete= models.CASCADE)
+    book= models.ForeignKey(Book, on_delete= models.CASCADE)
+
