@@ -7,17 +7,29 @@ from django.db import models
 class Genre(models.Model):
     name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class Publisher(models.Model):
     publisher_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.publisher_name}'
 
 
 class Author(models.Model):
     author_name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return f'{self.author_name}'
+
 
 class Language(models.Model):
     name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Book(models.Model):
@@ -35,7 +47,10 @@ class Book(models.Model):
 
 class BookCatalogue(models.Model):
     book_id = models.ForeignKey(Book, on_delete=models.CASCADE)
-    no_of_books = models.IntegerField(max_length=1000)
+    no_of_books = models.IntegerField()
+
+    def __str__(self):
+        return f'{self.no_of_books}'
 
 
 class User(models.Model):
@@ -43,8 +58,12 @@ class User(models.Model):
     email = models.EmailField()
     book_id = models.ForeignKey(Book, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class Librarian(models.Model):
     book_catalogue = models.ForeignKey(BookCatalogue, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
+
